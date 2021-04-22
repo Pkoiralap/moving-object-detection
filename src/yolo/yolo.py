@@ -11,18 +11,19 @@ def get_output_layers(net):
 
 def draw_prediction(img, classes, class_id, confidence, x, y, x_plus_w, y_plus_h):
     COLORS = np.random.uniform(0, 255, size=(len(classes), 3))
-    color = COLORS[class_id]
+    # color = COLORS[class_id]
+    color = [255, 255, 255]
     cv2.rectangle(img, (x, y), (x_plus_w, y_plus_h), color, 2)
     return color
 
 
-def draw_name(img, boxes):
+def draw_names(img, boxes, index2namemap={}):
     for box in boxes:
         x = box["x"]
         y = box["y"]
         color = box["color"]
-        label = box["class"]
-        cv2.putText(img, f"{box['index']}-{label}", (round(x) - 10, round(y) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+        label = index2namemap.get(box['index'], f"{box['index']}-{box['class']}")
+        cv2.putText(img, label, (round(x) - 10, round(y) - 10), cv2.FONT_HERSHEY_SIMPLEX, 2, color, 5)
 
 
 def get_bbox_average(img_rgb, x1, y1, x2, y2, row_number=40):
@@ -102,7 +103,8 @@ def yolo(image, classes="src/yolo/classes.txt", config="src/yolo/yolo.cfg", weig
             "y": y,
             "w": w,
             "h": h,
-            "class": classes[class_ids[i]],
+            # "class": classes[class_ids[i]],
+            "class": "person",
             "confidence": confidences[i],
             "color": color,
             "centroid": np.array([x + w/2, y + h/2]),

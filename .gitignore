@@ -1,3 +1,6 @@
 venv/
 *.weights
 data/
+*/__pycache__/
+*.pyo
+*.pyc
