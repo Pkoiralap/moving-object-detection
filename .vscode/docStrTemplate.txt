@@ -1,0 +1,22 @@
+
+{{summaryPlaceholder}}
+
+Args:
+{{#args}}
+    {{var}} ({{typePlaceholder}}) : {{descriptionPlaceholder}}
+{{/args}}
+
+Exceptions:
+{{#exceptions}}               
+    {{type}} : {{descriptionPlaceholder}}
+{{/exceptions}}
+
+Yields:
+{{#yields}}                   
+    {{typePlaceholder}} : {{descriptionPlaceholder}}
+{{/yields}}
+
+Returns:
+{{#returns}}                  
+    {{typePlaceholder}} : {{descriptionPlaceholder}}
+{{/returns}}
